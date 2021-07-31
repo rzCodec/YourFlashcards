@@ -103,7 +103,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
         private TextView tvSubjectName;
         private TextView tvDateAndTime;
         private Button btnViewFlashcards;
-		private Button btnSubjectOptions;
+	private Button btnSubjectOptions;
         private final iOnClickListener clickListener;
 
         public ViewHolder(final View v, final iOnClickListener iOnClickListener) {
@@ -123,7 +123,6 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
                     //Go to MainActivity, line 74
                     //This pattern is great to start another activity from a fragment that uses a recycler view & card view.
                     clickListener.onItemClick(subject);
-
                 }
             });
 			
@@ -157,7 +156,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
                             switch(item.getItemId()){
                                 case R.id.editSubjectDetails:
 
-									 CustomViewManager manager = new CustomViewManager(activity, R.layout.custom_subject_dialog);
+		CustomViewManager manager = new CustomViewManager(activity, R.layout.custom_subject_dialog);
                 final EditText editTextSubjectName = manager.customView.findViewById(R.id.editTextCustomSubject);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
@@ -169,7 +168,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Subject subject = items.get(getAdapterPosition());
                         final String subjectName = editTextSubjectName.getText().toString();
-						subject.setSubjectName(subjectName);
+			subject.setSubjectName(subjectName);
                         databaseManager.subjectDatabaseOperation("UPDATE", subject);
                     }
                 });
@@ -177,72 +176,24 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
                     }
                 });
 
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
-									return true;
-
-                                case R.id.deleteCurrentSubject:
-                                    Subject subject = items.get(getAdapterPosition());
-                                    databaseManager.subjectDatabaseOperation("DELETE", subject);
-									return true;
-                                default: return false;
+		return true;
+                case R.id.deleteCurrentSubject:
+                Subject subject = items.get(getAdapterPosition());
+                databaseManager.subjectDatabaseOperation("DELETE", subject);
+		return true;
+                default: return false;
                             }
                         }
                     });
-                    popupMenu.show();
-				}
-			});
+        	popupMenu.show();
+	     	}
+	  });
 
-			/*
-            //Deletes a subject and then updates the UI.
-            btnDeleteSubject = v.findViewById(R.id.btnDeleteSubject);
-            btnDeleteSubject.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View view) {
-                    final Subject subject = items.get(getAdapterPosition());
-
-                    DatabaseManager databaseManager = new DatabaseManager(v.getContext(), new DatabaseManager.iCallback() {
-                        @Override
-                        public void returnSubjects(ArrayList<Subject> subjectArrayList) {
-                            refreshData(subjectArrayList);
-                            UtilitiesMessage.showToastMessage(view.getContext(),
-                                    subject.getSubjectName() + " has been deleted.");
-                        }
-
-                        @Override
-                        public void returnFlashcards(ArrayList<Flashcard> flashcardArrayList) {
-
-                        }
-                    });
-
-                    databaseManager.subjectDatabaseOperation("DELETE", subject);
-
-                    /*
-                    Needle.onBackgroundThread().execute(new UiRelatedTask<ArrayList<Subject>>() {
-                        @Override
-                        protected ArrayList<Subject> doWork() {
-                            //Delete all the flashcards first, THEN delete the subject.
-                            db.subjectDao().deleteFlashcards(subject.getSubjectName());
-                            db.subjectDao().deleteSubject(subject);
-                            if(items.size() == 0){
-                                AppDatabase.destroyInstance(); //Clear the database because there are no more subjects.
-                            }
-                            return (ArrayList<Subject>) db.subjectDao().getAllSubjects();
-                        }
-
-                        @Override
-                        protected void thenDoUiRelatedWork(ArrayList<Subject> subjects) {
-                            refreshData(subjects);
-                            UtilitiesMessage.showToastMessage(view.getContext(),
-                                    subject.getSubjectName() + " has been deleted.");
-                        }
-                    });
-                }
-            });*/
         }
     }//end of view holder class
 
