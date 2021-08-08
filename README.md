@@ -6,3 +6,5 @@ Technologies that I learned
 
 * Android Room Database
 * Android UI Library (Card & Recycler View)
+
+<img src="https://user-images.githubusercontent.com/25613143/128640715-42e7f2a5-b421-4ee0-8cf6-eafdad6a80a7.png" width="288">
