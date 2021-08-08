@@ -9,8 +9,8 @@ Technologies that I learned
 
 <table style="width:100%">
   <tr>
-    <th><img src="https://user-images.githubusercontent.com/25613143/128640715-42e7f2a5-b421-4ee0-8cf6-eafdad6a80a7.png" width="288"></th>
-    <th>Lastname</th> 
+    <th><img src="https://user-images.githubusercontent.com/25613143/128641154-88ff7796-59b1-49ff-9e0f-76bfb90d1a49.png" width="288"></th>
+    <th><img src="https://user-images.githubusercontent.com/25613143/128641354-46beb394-35fb-4d07-83d3-3a7bd261a027.png" width="288">e</th> 
   </tr>
 </table>
 
