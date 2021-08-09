@@ -5,7 +5,7 @@ An app to help students learn and memorize various information for tests and oth
 Technologies that I learned
 
 •	UI Design and layout created with XML, Material Design card and recycler view.
-* Android Room Database for storage
+• Android Room Database for storage
 
 <table style="width:120%">
   <tr>
