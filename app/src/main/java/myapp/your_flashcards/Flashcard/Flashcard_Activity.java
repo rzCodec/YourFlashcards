@@ -50,46 +50,34 @@ public class Flashcard_Activity extends AppCompatActivity {
         });
 
         final FloatingActionButton fabAddFlashcard = findViewById(R.id.FabAddFlashcard);
-        //This activity is started when the user clicks a button on the subject card view called view flashcards
-
-        //Get the subject object which is passed to this activity from the MainActivity class on line #67
         final Subject subject = getIntent().getParcelableExtra("subject_data");
         setTitle(subject.getSubjectName());
 
-        final AppDatabase db = AppDatabase.getAppDatabase(this); //Create a singleton instance of the db for this activity
+        final AppDatabase db = AppDatabase.getAppDatabase(this); 
         final ArrayList<Flashcard> flashcardList = new ArrayList<>();
-        flashcardAdapter = new FlashcardAdapter(flashcardList, this, this, subject, db); //Pass the singleton
-
-        //Whenever a user creates a new flashcard,
-        //it must be associated with the current subject.
-
+        flashcardAdapter = new FlashcardAdapter(flashcardList, this, this, subject, db); 
+	    
         RecyclerView recyclerView = findViewById(R.id.flashcard_recycler);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(flashcardAdapter);
 
-        //Read the flashcards and then display them to the user.
         Needle.onBackgroundThread().execute(new UiRelatedTask<ArrayList<Flashcard>>() {
             @Override
-            protected ArrayList<Flashcard> doWork() {
-                //Find all the flashcards related to the current subject.
+            protected ArrayList<Flashcard> doWork() {       
                 return (ArrayList<Flashcard>)  db.flashcard_Dao().getFlashcardsForSubjectByID(subject.getSubjectID());
             }
 
             @Override
             protected void thenDoUiRelatedWork(ArrayList<Flashcard> flashcards) {
-                //Receive the flashcard list from above (line 75) and pass it to the adapter
                 flashcardAdapter.refreshData(flashcards);
             }
         });
 
-        //Create a new flashcard when this button is clicked
-        //The flashcard is created related to the current subject.
         fabAddFlashcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Custom Dialog to get flashcard details
                 LayoutInflater inflater = LayoutInflater.from(Flashcard_Activity.this);
                 View customView = inflater.inflate(R.layout.custom_flashcard_dialog, null);
                 final EditText editTextFlashcardTitle = customView.findViewById(R.id.editTextFlashcardTitle);
@@ -148,9 +136,9 @@ public class Flashcard_Activity extends AppCompatActivity {
         });
     }
 	
-	@Override
-	protected void onDestroy(){
+    	@Override
+    	protected void onDestroy(){
 		super.onDestroy();
-		AppDatabase.destroyInstance(); //Destroy the database when the user exits this activity
-	}
-}//end of Flashcard Activity
+		AppDatabase.destroyInstance(); 
+    	}
+}
