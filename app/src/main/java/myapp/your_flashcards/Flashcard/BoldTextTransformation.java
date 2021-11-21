@@ -3,10 +3,6 @@ package myapp.your_flashcards.Flashcard;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 
-/**
- * Created by Ronald on 2017/09/11.
- */
-
 public class BoldTextTransformation {
     public BoldTextTransformation() {
 
