@@ -23,10 +23,6 @@ import myapp.your_flashcards.Room_Database.AppDatabase;
 import myapp.your_flashcards.Room_Database.DatabaseManager;
 import myapp.your_flashcards.Subject.Subject;
 
-
-/**
- * Created by Ronald Lai on 2018/06/11.
- */
 public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.MyViewHolder> {
     private final Context context;
     private ArrayList<Flashcard> flashcard_Items;
@@ -67,9 +63,6 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.MyVi
         }
     }
 
-    /*
-     *Constructor to create the card
-     */
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent,
                                            int viewType) {
@@ -77,10 +70,7 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.MyVi
                 .inflate(R.layout.flashcard_cardview, parent, false);
         return new MyViewHolder(v);
     }
-
-    /*
-     *Method to handle displaying and showing of text views, etc
-     */
+	
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Flashcard item = flashcard_Items.get(position);
@@ -92,9 +82,6 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.MyVi
         holder.tvFlashcardDateAndTime.setText("Created on " + item.getFlashcard_Date() + " @" + item.getFlashcard_Time());
     }
 
-    /*
-     *Method to return the size of the list of flashcard_Items
-     */
     @Override
     public int getItemCount() {
         if (flashcard_Items == null) {
@@ -103,7 +90,6 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.MyVi
         return flashcard_Items.size();
     }
 
-    //Inner class to find the components on the XML file
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView tvFlashcardTitle,
                          tvFlashcardQuestion,
@@ -205,10 +191,9 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.MyVi
                             }
                         }
                     });
-                    //Display the popmenu when the user clicks the options button
                     popupMenu.show();
                 }
             });
         }
     }
-}//end of class
+}
