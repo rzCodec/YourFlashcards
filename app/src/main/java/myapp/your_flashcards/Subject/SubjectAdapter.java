@@ -11,12 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import myapp.your_flashcards.CustomViewManager;
@@ -26,9 +23,6 @@ import myapp.your_flashcards.Room_Database.AppDatabase;
 import myapp.your_flashcards.Room_Database.DatabaseManager;
 import myapp.your_flashcards.iOnClickListener;
 
-/**
- * Created by User on 2018/06/13.
- */
 public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHolder> {
     private final Context context;
     private ArrayList<Subject> items;
@@ -45,12 +39,9 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
         this.context = context;
         this.activity = activity;
         this.db = db;
-        this.iOnClickListener = iOnClickListener; //Callback to be executed when the user clicks...
+        this.iOnClickListener = iOnClickListener; 
     }
 
-    /*
-     *Constructor to create the card
-     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent,
                                          int viewType) {
@@ -58,21 +49,14 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
                 .inflate(R.layout.subject_cardview, parent, false);
         return new ViewHolder(v, this.iOnClickListener);
     }
-
-    /*
-     *Method to handle displaying and showing of text views, etc
-     */
+	
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Subject subject = items.get(position);
-        //TODO Fill in your logic for binding the view.
         holder.tvSubjectName.setText(subject.getSubjectName());
         holder.tvDateAndTime.setText("Created on " + subject.getSubjectDate() + " @" + subject.getSubjectTime());
     }
 
-    /*
-     *Method to return the size of the list of items
-     */
     @Override
     public int getItemCount() {
         if (items == null) {
@@ -81,23 +65,17 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
         return items.size();
     }
 
-    /**
-     * Adds an updated subject list to the adapter and refreshes
-     * @param subjectList
-     */
     public void refreshData(ArrayList<Subject> subjectList){
         try {
             this.items.clear();
             this.items.addAll(subjectList);
-            this.notifyDataSetChanged();
-            //NotifyDataSetChanged can only be called on the Main Thread and not on a background thread
+            this.notifyDataSetChanged();         
         }
         catch (Exception ex){
             ex.printStackTrace();
         }
     }
 
-    //Inner class to find the components on the XML file
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.txtviewSubjectName)
         private TextView tvSubjectName;
@@ -111,17 +89,12 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
             this.clickListener = iOnClickListener;
             ButterKnife.bind(this, v);
             tvSubjectName = v.findViewById(R.id.txtviewSubjectName);
-            tvDateAndTime = v.findViewById(R.id.txtviewDateAndTime);
-            //View the flashcards associated with this selected subject.
+            tvDateAndTime = v.findViewById(R.id.txtviewDateAndTime);     
             btnViewFlashcards = v.findViewById(R.id.btnViewFlashcards);
             btnViewFlashcards.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Subject subject = items.get(getAdapterPosition());
-                    //The callback is defined in the main activity in the SubjectAdapter's parameters
-                    //Whenever the user clicks view flashcards, the current subject is passed to the callback handler
-                    //Go to MainActivity, line 74
-                    //This pattern is great to start another activity from a fragment that uses a recycler view & card view.
+                    Subject subject = items.get(getAdapterPosition());              
                     clickListener.onItemClick(subject);
                 }
             });
@@ -129,10 +102,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
 			btnSubjectOptions = v.findViewById(R.id.btnSubjectOptions);
 			btnSubjectOptions.setOnClickListener(new View.OnClickListener() {
 				@Override
-				public void onClick(final View view) {
-					//Create the dialog and give the user the option
-					//To delete the current subject or edit the name
-
+				public void onClick(final View view) {			
                     PopupMenu popupMenu = new PopupMenu(context, btnSubjectOptions);
                     popupMenu.inflate(R.menu.subject_options_menu);
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -193,8 +163,6 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
         	popupMenu.show();
 	     	}
 	  });
-
         }
-    }//end of view holder class
-
-}//end of class
+    }
+}
