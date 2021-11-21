@@ -10,10 +10,6 @@ import myapp.your_flashcards.Utilities.UtilitiesMessage;
 import needle.Needle;
 import needle.UiRelatedTask;
 
-/**
- * Created by User on 2018/06/22.
- */
-
 public class DatabaseManager {
     public interface iCallback {
         void returnSubjects(ArrayList<Subject> subjectArrayList);
@@ -39,21 +35,19 @@ public class DatabaseManager {
                     return (ArrayList<Subject>) db.subjectDao().getAllSubjects();
                 }
                 else if(operationType.equals("INSERT")){
-                    ArrayList<Subject> subjectList = (ArrayList<Subject>) db.subjectDao().getAllSubjects();
+                    ArrayList<Subject> subjects = (ArrayList<Subject>) db.subjectDao().getAllSubjects();
                     ArrayList<String> stringArrayList = new ArrayList<>();
 
-                    //Add each subject name to an array list of strings
-                    for(Subject s : subjectList){
+                    for(Subject s : subjects){
                         stringArrayList.add(s.getSubjectName());
                     }
 
-                    //If the array list of subject names does not contain the subject name to be inserted...
                     if(!stringArrayList.contains(subject.getSubjectName())){
-                        db.subjectDao().insertAllSubjects(subject); //Then insert the new subject into the database
+                        db.subjectDao().insertAllSubjects(subject); 
                         return (ArrayList<Subject>) db.subjectDao().getAllSubjects();
                     }
                     else {
-                        doesExist = true; //Otherwise the subject already exists and a different name must be chosen
+                        doesExist = true;
                     }
                 }
 				else if(operationType.equals("UPDATE")){
@@ -70,10 +64,10 @@ public class DatabaseManager {
 
             @Override
             protected void thenDoUiRelatedWork(ArrayList<Subject> subjects) {
-                if(doesExist == true){//If the current subject trying to be added already exists, deny the creation
+                if(doesExist == true){
                     UtilitiesMessage.showToastMessage(context, "Please enter a different subject name.");
                 }
-                else {//Otherwise send all the subjects that have been read back to the main activity line 85
+                else {
                     callback.returnSubjects(subjects);
                 }
             }
