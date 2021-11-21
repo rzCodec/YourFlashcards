@@ -5,19 +5,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
-
 import java.util.ArrayList;
-
 import myapp.your_flashcards.Flashcard.Flashcard;
 import myapp.your_flashcards.Flashcard.Flashcard_Activity;
 import myapp.your_flashcards.Room_Database.AppDatabase;
 import myapp.your_flashcards.Utilities.UtilitiesMessage;
 import needle.Needle;
 import needle.UiRelatedTask;
-
-/**
- * Created by Ronald Lai on 2018/06/17.
- */
 
 public class CustomViewManager {
     private int layout;
@@ -35,5 +29,4 @@ public class CustomViewManager {
         View customView = layoutInflater.inflate(layout, null);
         return customView;
     }
-
 }
