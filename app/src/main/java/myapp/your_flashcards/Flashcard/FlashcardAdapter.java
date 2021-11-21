@@ -74,7 +74,6 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.MyVi
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Flashcard item = flashcard_Items.get(position);
-        //TODO Fill in your logic for binding the view.
         holder.tvFlashcardTitle.setText(item.getTitle());
 		BoldTextTransformation btt = new BoldTextTransformation();
         holder.tvFlashcardQuestion.setText(btt.makeBold("Question: ", item.getQuestion()));
