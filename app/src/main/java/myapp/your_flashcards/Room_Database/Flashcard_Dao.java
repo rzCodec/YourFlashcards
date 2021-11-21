@@ -5,15 +5,8 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-
 import java.util.List;
-
 import myapp.your_flashcards.Flashcard.Flashcard;
-
-
-/**
- * Created by User on 2018/06/17.
- */
 
 @Dao
 public interface Flashcard_Dao {
