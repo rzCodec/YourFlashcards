@@ -86,23 +86,20 @@ public class SubjectFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment and find the components
         final View fragmentView = inflater.inflate(R.layout.content_main_subject, container, false);
         db = AppDatabase.getAppDatabase(fragmentView.getContext());
-        //Create a singleton instance for this fragment
-        //Create a new adapter with an empty list
+     
         final SubjectAdapter adapter = new SubjectAdapter(new ArrayList<Subject>(),
                 fragmentView.getContext(),
                 getActivity(),
                 db,
-                //Custom Interface to start a new activity from the subject adapter which is linked to the recycler view
                 new iOnClickListener() {
                     @Override
                     public void onItemClick(Object elem) {
                         Intent i = new Intent(fragmentView.getContext(), Flashcard_Activity.class);
-                        i.putExtra("subject_data", (Subject) elem); //Cast the object the user has selected to the desired one we need
+                        i.putExtra("subject_data", (Subject) elem); 
                         startActivity(i);
-                        AppDatabase.destroyInstance(); //When the user starts a new activity, destroy the database
+                        AppDatabase.destroyInstance();
                     }
                 });
 
@@ -116,14 +113,12 @@ public class SubjectFragment extends Fragment {
                 db,
                 new DatabaseManager.iCallback() {
             @Override
-            public void returnSubjects(ArrayList<Subject> subjectArrayList) {
-                //Work with the subjects that have been returned from the database
+            public void returnSubjects(ArrayList<Subject> subjectArrayList) {       
                 adapter.refreshData(subjectArrayList);
             }
 
             @Override
-            public void returnFlashcards(ArrayList<Flashcard> flashcardArrayList) {
-                //Work with the flashcards that have been returned from the database
+            public void returnFlashcards(ArrayList<Flashcard> flashcardArrayList) {             
             }
         });
         databaseManager.subjectDatabaseOperation("READ", null);
@@ -142,9 +137,7 @@ public class SubjectFragment extends Fragment {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        final String subjectName = editTextSubjectName.getText().toString();
-                        //Check if the user has entered a subject name that already exists.
-                        //We can not store duplicate subject names because it violates the primary key constraint.
+                        final String subjectName = editTextSubjectName.getText().toString();               
                         if(subjectNameList.contains(subjectName)){
                             UtilitiesMessage.showToastMessage(fragmentView.getContext()
                                     , "Subject " + subjectName + " already exists.");
@@ -170,8 +163,6 @@ public class SubjectFragment extends Fragment {
         return fragmentView;
     }
 
-
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -203,16 +194,15 @@ public class SubjectFragment extends Fragment {
      * <p>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
+     * > Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+    public interface OnFragmentInteractionListener {     
         void onFragmentInteraction(Uri uri);
     }
 
     @Override
     public void onDestroy(){
         super.onDestroy();
-        AppDatabase.destroyInstance(); //Destroy the database
+        AppDatabase.destroyInstance();
     }
 }
