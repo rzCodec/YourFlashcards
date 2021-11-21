@@ -2,17 +2,9 @@ package myapp.your_flashcards.Room_Database;
 
 import android.os.AsyncTask;
 import androidx.annotation.NonNull;
-
 import android.view.View;
-
 import java.util.ArrayList;
-
 import myapp.your_flashcards.Subject.Subject;
-
-/**
- * Created by User on 2018/06/12.
- */
-
 
 public class DatabaseInitializer {
 
@@ -37,16 +29,7 @@ public class DatabaseInitializer {
     }
 
     public void readFromDatabase(){
-
     }
-
-    /* Delete this when the app is working perfectly
-    public static void populateAsync(@NonNull final AppDatabase db,
-                                     View view,
-                                     Subject subject) {
-        PopulateDbAsync task = new PopulateDbAsync(db);
-        task.execute();
-    }*/
 
     public void populateSync(@NonNull final AppDatabase db) {
         writeToDatabase(db);
@@ -58,15 +41,13 @@ public class DatabaseInitializer {
     }
 
     public void writeToDatabase(AppDatabase db) {
-        //Add the subject to the database
         addUser(db, subject);
         readFromDatabase(db);
     }
 
     public void readFromDatabase(AppDatabase db){
-        //Get all the subjects from the database
-        ArrayList<Subject> subjectList = (ArrayList<Subject>) db.subjectDao().getAllSubjects();
-        iReturnSubjects.getSubjects(subjectList);
+        ArrayList<Subject> subjects = (ArrayList<Subject>) db.subjectDao().getAllSubjects();
+        iReturnSubjects.getSubjects(subjects);
     }
 
     private class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
@@ -81,7 +62,6 @@ public class DatabaseInitializer {
             writeToDatabase(mDb);
             return null;
         }
-
     }
 }
 
