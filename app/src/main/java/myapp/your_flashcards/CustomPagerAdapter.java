@@ -3,16 +3,9 @@ package myapp.your_flashcards;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
 import myapp.your_flashcards.Subject.SubjectFragment;
 import myapp.your_flashcards.Reminder.ReminderFragment;
-/**
- * Created by User on 2017/09/16.
- */
 
-/**
- * Created by User on 2018/05/27.
- */
 public class CustomPagerAdapter extends FragmentPagerAdapter {
 
     private String[] arrTitles;
