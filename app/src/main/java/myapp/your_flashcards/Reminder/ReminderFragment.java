@@ -32,7 +32,7 @@ public class ReminderFragment extends Fragment {
     private OnFragmentInteractionListener mReminderListener;
 
     public ReminderFragment() {
-        // Required empty public constructor
+     
     }
 
     /**
