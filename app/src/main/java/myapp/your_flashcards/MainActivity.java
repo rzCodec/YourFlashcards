@@ -53,24 +53,19 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("Study Flashcards");
-
         db = AppDatabase.getAppDatabase(getApplicationContext());
-        //Create a singleton instance for this activity
-
-        //Create a new adapter with an empty list/
+     
         final SubjectAdapter adapter = new SubjectAdapter(new ArrayList<Subject>(),
                 this,
                 MainActivity.this,
-                db,
-                //Custom Interface to start a new activity from the subject adapter which is linked to the recycler view
-                //This callback code is only executed when the user clicks the button on the card view to start the new activity
+                db,        
                 new iOnClickListener() {
                     @Override
                     public void onItemClick(Object elem) {
                         Intent i = new Intent(getApplicationContext(), Flashcard_Activity.class);
                         i.putExtra("subject_data", (Subject) elem); //Cast the object to the desired one we need
                         startActivity(i);
-                        AppDatabase.destroyInstance(); //When the user starts a new activity, destroy the database
+                        AppDatabase.destroyInstance();
                     }
                 });
 
@@ -82,24 +77,18 @@ public class MainActivity extends AppCompatActivity
 
         final DatabaseManager databaseManager = new DatabaseManager(this,
                 db,
-
-                //Define a new callback that listens for the execution of it in line 96.
                 new DatabaseManager.iCallback() {
                     @Override
-                    public void returnSubjects(ArrayList<Subject> subjectArrayList) {
-                        //Work with the subjects that have been returned from the database
-                        //Check DatabaseManager line 77
+                    public void returnSubjects(ArrayList<Subject> subjectArrayList) {                 
                         adapter.refreshData(subjectArrayList);
                     }
 
                     @Override
                     public void returnFlashcards(ArrayList<Flashcard> flashcardArrayList) {
-                        //Work with the flashcards that have been returned from the database
+                       
                     }
                 });
         databaseManager.subjectDatabaseOperation("READ", null);
-        //Read all the subjects from the database, execute the callback and handle the callback in line 88
-
         fabAddSubject = findViewById(R.id.FabAddSubject);
         fabAddSubject.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,9 +105,7 @@ public class MainActivity extends AppCompatActivity
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        final String subjectName = editTextSubjectName.getText().toString();
-                        //Check if the user has entered a subject name that already exists.
-                        //We can not store duplicate subject names because it violates the primary key constraint.
+                        final String subjectName = editTextSubjectName.getText().toString();              
                         if(subjectNameList.contains(subjectName)){
                             UtilitiesMessage.showToastMessage(getApplicationContext()
                                     , "Subject " + subjectName + " already exists.");
@@ -157,8 +144,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+    public boolean onCreateOptionsMenu(Menu menu) {    
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -168,9 +154,7 @@ public class MainActivity extends AppCompatActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
+        int id = item.getItemId(); 
         if (id == R.id.action_settings) {
             moveTaskToBack(true);
             android.os.Process.killProcess(android.os.Process.myPid());
@@ -184,9 +168,7 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -205,6 +187,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        AppDatabase.destroyInstance(); //Destroy the database when the user has exited the app.
+        AppDatabase.destroyInstance();
     }
 }
