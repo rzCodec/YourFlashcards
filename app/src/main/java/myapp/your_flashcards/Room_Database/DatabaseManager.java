@@ -1,9 +1,7 @@
 package myapp.your_flashcards.Room_Database;
 
 import android.content.Context;
-
 import java.util.ArrayList;
-
 import myapp.your_flashcards.Flashcard.Flashcard;
 import myapp.your_flashcards.Subject.Subject;
 import myapp.your_flashcards.Utilities.UtilitiesMessage;
@@ -36,13 +34,13 @@ public class DatabaseManager {
                 }
                 else if(operationType.equals("INSERT")){
                     ArrayList<Subject> subjects = (ArrayList<Subject>) db.subjectDao().getAllSubjects();
-                    ArrayList<String> stringArrayList = new ArrayList<>();
+                    ArrayList<String> subjectNames = new ArrayList<>();
 
                     for(Subject s : subjects){
-                        stringArrayList.add(s.getSubjectName());
+                        subjectNames.add(s.getSubjectName());
                     }
 
-                    if(!stringArrayList.contains(subject.getSubjectName())){
+                    if(!subjectNames.contains(subject.getSubjectName())){
                         db.subjectDao().insertAllSubjects(subject); 
                         return (ArrayList<Subject>) db.subjectDao().getAllSubjects();
                     }
