@@ -10,10 +10,6 @@ import androidx.room.PrimaryKey;
 
 import myapp.your_flashcards.Subject.Subject;
 
-/**
- * Created by Ronald Lai on 2018/05/27.
- */
-
 @Entity(foreignKeys = @ForeignKey(
         entity = Subject.class,
         parentColumns = "subjectID",
@@ -43,7 +39,7 @@ public class Flashcard implements Parcelable{
     private int subjectID;
 
     @ColumnInfo(name = "subjectName")
-    private String subjectName; //Points to a subject, which creates a 1-m relationship with subjects and flashcards
+    private String subjectName;
 
     public String getSubjectName() {
         return subjectName;
@@ -80,10 +76,7 @@ public class Flashcard implements Parcelable{
         this.subjectName = subjectName;
         this.subjectID = subjectID;
     }
-
-
-    // example constructor that takes a Parcel
-    // and gives you an object populated with it's values
+        
     private Flashcard(Parcel in) {
         Title = in.readString();
         Question = in.readString();
@@ -105,7 +98,6 @@ public class Flashcard implements Parcelable{
     public void setTitle(String title) {
         Title = title;
     }
-
 
     public String getQuestion() {
         return Question;
