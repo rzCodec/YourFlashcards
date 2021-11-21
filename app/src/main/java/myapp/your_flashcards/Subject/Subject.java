@@ -7,14 +7,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
-/**
- * Created by Ronald Lai on 2018/06/11.
- */
-
 @Entity(tableName = "subject")
 public class Subject implements Parcelable{
-
-    //private String subjectID;
 
     @PrimaryKey(autoGenerate = true)
     private int subjectID;
@@ -25,13 +19,12 @@ public class Subject implements Parcelable{
     @ColumnInfo(name = "num_flashcards")
     private int numFlashcards;
 	
-	@ColumnInfo(name = "subject_date")
-	private String subjectDate;
+   @ColumnInfo(name = "subject_date")
+   private String subjectDate;
 	
-	@ColumnInfo(name = "subject_time")
-	private String subjectTime;
+    @ColumnInfo(name = "subject_time")
+    private String subjectTime;
 
-    //Private constructor for the parcel
     private Subject(Parcel parcel){
         this.subjectName = parcel.readString();
         this.numFlashcards = parcel.readInt();
@@ -40,12 +33,10 @@ public class Subject implements Parcelable{
 		this.subjectTime = parcel.readString();
     }
 
-    //General constructor to create the subject
     public Subject(String subjectName) {
         this.subjectName = subjectName;
     }
 
-    //Setters
     public String getSubjectName() {
         return subjectName;
     }
@@ -58,16 +49,14 @@ public class Subject implements Parcelable{
         this.subjectID = subjectID;
     }
 	
-	public void setSubjectDate(String date) {
-		this.subjectDate = date;
-	}
+    public void setSubjectDate(String date) {
+	this.subjectDate = date;
+    }
 	
-	public void setSubjectTime(String time) {
-		this.subjectTime = time;
-	}
+    public void setSubjectTime(String time) {		
+	this.subjectTime = time;
+    }
 
-
-    //Getters
     public int getNumFlashcards() {
         return numFlashcards;
     }
@@ -88,8 +77,6 @@ public class Subject implements Parcelable{
 		return subjectTime;
 	}
 
-
-	//The below methods are implemented with the parcelable interface
     @Override
     public int describeContents() {
         return 0;
@@ -106,7 +93,7 @@ public class Subject implements Parcelable{
 
     public static final Parcelable.Creator<Subject> CREATOR = new Parcelable.Creator<Subject>() {
         public Subject createFromParcel(Parcel in) {
-            return new Subject(in); //Refer to the private Subject Constructor
+            return new Subject(in); 
         }
 
         public Subject[] newArray(int size) {
