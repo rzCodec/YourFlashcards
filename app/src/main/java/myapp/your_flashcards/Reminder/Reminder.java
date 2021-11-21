@@ -3,10 +3,6 @@ package myapp.your_flashcards.Reminder;
 import java.sql.Time;
 import java.util.Date;
 
-/**
- * Created by User on 2018/06/11.
- */
-
 public class Reminder {
     private String reminderName;
     private String message;
