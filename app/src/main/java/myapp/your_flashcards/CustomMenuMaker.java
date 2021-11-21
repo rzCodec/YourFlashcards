@@ -6,10 +6,6 @@ import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.View;
 
-/**
- * Created by User on 2018/07/02.
- */
-
 public class CustomMenuMaker {
     private AppCompatActivity activityInstance;
     private Context context;
@@ -41,6 +37,4 @@ public class CustomMenuMaker {
         MenuInflater inflater = activityInstance.getMenuInflater();
         inflater.inflate(menuID, menu);
     }
-
-
 }
